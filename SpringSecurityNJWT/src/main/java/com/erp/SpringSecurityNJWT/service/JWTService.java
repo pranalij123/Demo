@@ -6,6 +6,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,7 @@ import java.util.function.Function;
 @Service
 public class JWTService {
 
-
+	
     private String secretkey = "";
 
     public JWTService() {
@@ -81,7 +83,7 @@ public class JWTService {
         return extractExpiration(token).before(new Date());
     }
 
-    public Date extractExpiration(String token) {
+    private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
